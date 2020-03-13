@@ -1,3 +1,5 @@
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -37,6 +39,26 @@ public class disk_scheduling {
 		System.out.println();
 		System.out.println("Total Head Movements using SSTF: " + output.totalHeadMovements);
 		
+		output = newOptimized(requests);
+		System.out.println("The sequence of head movement using the new optimized algorithm:");
+		for(int i = 0 ; i < output.sequence.size() ; i++) {
+			System.out.print(output.sequence.elementAt(i));
+			if(i != output.sequence.size() - 1)
+				System.out.print(" , ");
+		}
+		System.out.println();
+		System.out.println("Total Head Movements using the new optimized algorithm: " + output.totalHeadMovements);
+		
+		
+	}
+	public static Output newOptimized(Vector<Integer> requests) {
+		Vector<Integer> tmp = new Vector<Integer>();
+		tmp.add(0);
+		for(int i = 0 ; i < requests.size() ; i++)
+			tmp.add(requests.get(i));
+		Collections.sort(tmp);
+		Output output = new Output(tmp);
+		return output;
 	}
 	public static Output SSTF(int head, Vector<Integer> requests) {
 		Vector<Integer> tmp = new Vector<Integer>();
