@@ -64,6 +64,7 @@ public class disk_scheduling {
 	
 	public static Output SCAN(int head, Vector<Integer> requests) {
 		Vector<Integer> sequence = new Vector<Integer>();
+		Vector<Integer> seq = new Vector<Integer>();
 		Vector<Integer> tmp = new Vector<Integer>();
 		Vector<Integer> vec = new Vector<Integer>();
 		
@@ -73,6 +74,7 @@ public class disk_scheduling {
 		int min = Integer.MAX_VALUE;
 		
 		sequence.add(head);
+		seq.add(head);
 		while(counter != requests.size()) {
 			min = Integer.MAX_VALUE;
 			index = 0;
@@ -92,6 +94,7 @@ public class disk_scheduling {
 					}
 					head = vec.get(index);
 					sequence.add(head);
+					seq.add(head);
 					counter++;
 				}
 				else {
@@ -113,6 +116,7 @@ public class disk_scheduling {
 					}
 					head = vec.get(index);
 					sequence.add(head);
+					seq.add(head);
 					counter++;
 				}
 				else {
@@ -124,31 +128,9 @@ public class disk_scheduling {
 				}
 			}
 		}
-//		while(counter != requests.size()) {
-//			index = 0;
-//			min = Integer.MAX_VALUE;
-//			if(down) {
-//				vec.clear();
-//				vec = getMin(head , tmp);
-//				for(int i = 0 ; i < vec.size() ; i++) {
-//					if(min > Math.abs(head - vec.get(i))) {
-//						min = Math.abs(head - vec.get(i));
-//						index = i;
-//					}
-//				}
-//				head = vec.get(index);
-//				sequence.add(head);
-//				counter++;
-//				tmp.clear();
-//				for(int i = 0 ; i < requests.size() ; i++) {
-//					if(!sequence.contains(requests.get(i)))
-//						tmp.add(i);
-//				}
-//			}
-//			if()
-//		}
-//		
-		Output output = new Output(sequence);
+		Output output = new Output(seq);
+		System.out.println("SCAN head movements : " + output.totalHeadMovements);
+		output = new Output(sequence);
 		return output;
 	}
 	
