@@ -122,8 +122,8 @@ public class disk_scheduling {
 				else {
 					down = true;
 					if(down && counter != requests.size()) {
-						sequence.add(200);
-						head = 200;
+						sequence.add(199);
+						head = 199;
 					}
 				}
 			}
@@ -147,83 +147,6 @@ public class disk_scheduling {
 			if(requests.get(i) > head)
 				tmp.add(requests.get(i));
 		return tmp;
-	}
-	public static Output SCANn(int head, Vector<Integer> requests) {
-		Vector<Integer> tmp = new Vector<Integer>();
-		Vector<Integer> vec = new Vector<Integer>();
-		Vector<Integer> done = new Vector<Integer>();
-		for(int i = 0 ; i < requests.size() ; i++)
-			tmp.add(requests.elementAt(i));
-		boolean down = true;
-		int counter = 0;
-		int min = Integer.MAX_VALUE;
-		int index = 0;
-		done.add(head);
-		//Vector<Integer> tmp = new Vector<Integer>();
-		while(counter <= requests.size()) {
-			while(down && counter <= requests.size()) {
-				vec = getMin(head, tmp);
-				min = Integer.MAX_VALUE;
-				index = 0;
-				if(vec.size() > 0) {
-					for(int i = 0 ; i < vec.size() ; i++) {
-						if(min > Math.abs(head - vec.get(i))) {
-							min = head - vec.get(i);
-							index = i;
-						}
-					}
-					head = vec.get(index);
-					done.add(head);
-					counter++;
-					vec.clear();
-					tmp.clear();
-					for(int i = 0 ; i < requests.size() ; i++)
-						if(!done.contains(requests.get(i)))
-							tmp.add(requests.get(i));
-				}
-				else {
-					down = false;
-					//done.add(0);
-					head = 0;
-				}
-			}
-			if(counter < requests.size() && down)
-				done.add(0);
-			while(!down && counter <= requests.size()) {
-				tmp.clear();
-				for(int i = 0 ; i < requests.size() ; i++)
-					if(!done.contains(requests.get(i)))
-						tmp.add(requests.get(i));
-				vec = getMax(head, tmp);
-				min = Integer.MAX_VALUE;
-				index = 0;
-				if(vec.size() > 0) {
-					for(int i = 0 ; i < vec.size() ; i++) {
-						if(min > Math.abs(head - vec.get(i))) {
-							min = head - vec.get(i);
-							index = i;
-						}
-					}
-					head = vec.get(index);
-					done.add(head);
-					counter++;
-					vec.clear();
-					/*tmp.clear();
-					for(int i = 0 ; i < requests.size() ; i++)
-						if(!done.contains(requests.get(i)))
-							tmp.add(requests.get(i));
-				*/}
-				else {
-					down = true;
-					//done.add(200);
-				}
-				if(counter < requests.size() && !down)
-					done.add(200);
-			
-			}
-		}
-		Output output = new Output(done);
-		return output;
 	}
 	public static Output newOptimized(Vector<Integer> requests) {
 		Vector<Integer> tmp = new Vector<Integer>();
