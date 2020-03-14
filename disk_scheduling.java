@@ -49,6 +49,16 @@ public class disk_scheduling {
 		System.out.println();
 		System.out.println("Total Head Movements using SCAN: " + output.totalHeadMovements);
 		
+		output = CSCAN(head, requests);
+		System.out.println("The sequence of head movement using CSCAN:");
+		for(int i = 0 ; i < output.sequence.size() ; i++) {
+			System.out.print(output.sequence.elementAt(i));
+			if(i != output.sequence.size() - 1)
+				System.out.print(" , ");
+		}
+		System.out.println();
+		System.out.println("Total Head Movements using CSCAN: " + output.totalHeadMovements);
+		
 		output = newOptimized(requests);
 		System.out.println("The sequence of head movement using the new optimized algorithm:");
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
@@ -61,7 +71,50 @@ public class disk_scheduling {
 		
 		
 	}
-	
+	public static Output CSCAN(int head, Vector<Integer> requests) {
+		Vector<Integer> sequence = new Vector<Integer>();
+		Vector<Integer> seq = new Vector<Integer>();
+		Vector<Integer> tmp = new Vector<Integer>();
+		Vector<Integer> vec = new Vector<Integer>();
+		
+		int counter = 0;
+		int index = 0;
+		int min = Integer.MAX_VALUE;
+		
+		sequence.add(head);
+		seq.add(head);
+		while(counter != requests.size()) {
+			min = Integer.MAX_VALUE;
+			index = 0;
+			vec.clear();
+			tmp.clear();
+			for(int i = 0 ; i < requests.size(); i++) 
+				if(!sequence.contains(requests.get(i))) 
+					tmp.add(requests.get(i));
+			vec = getMax(head, tmp);
+			if(vec.size() > 0) {
+				for(int i = 0 ; i < vec.size() ; i++) {
+					if(min > Math.abs(head - vec.get(i))) {							min = Math.abs(head - vec.get(i));
+						index = i;
+					}
+				}
+				head = vec.get(index);
+				sequence.add(head);
+				seq.add(head);
+				counter++;
+			}
+			else {
+				if(sequence.lastElement() != 199)	
+					sequence.add(199);
+				sequence.add(0);
+				head = 0;
+			}
+		}
+		Output output = new Output(seq);
+		output = new Output(sequence);
+		return output;
+		
+	}
 	public static Output SCAN(int head, Vector<Integer> requests) {
 		Vector<Integer> sequence = new Vector<Integer>();
 		Vector<Integer> seq = new Vector<Integer>();
@@ -100,7 +153,8 @@ public class disk_scheduling {
 				else {
 					down = false;
 					if(!down && counter != requests.size()) {
-						sequence.add(0);
+						if(sequence.lastElement() != 0)
+							sequence.add(0);
 						head = 0;
 					}
 				}
@@ -122,7 +176,8 @@ public class disk_scheduling {
 				else {
 					down = true;
 					if(down && counter != requests.size()) {
-						sequence.add(199);
+						if(sequence.lastElement() != 199)
+							sequence.add(199);
 						head = 199;
 					}
 				}
@@ -133,7 +188,6 @@ public class disk_scheduling {
 		output = new Output(sequence);
 		return output;
 	}
-	
 	public static Vector<Integer> getMin(int head, Vector<Integer> requests){
 		Vector<Integer> tmp = new Vector<Integer>();
 		for(int i = 0 ; i < requests.size() ; i++)
