@@ -4,7 +4,8 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class disk_scheduling {
-	public static void main(String[] args) {
+	public static String out = "";
+	public static String main(String fileName) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter the number of requests: ");
 		int num = sc.nextInt();
@@ -21,64 +22,113 @@ public class disk_scheduling {
 		int head = sc.nextInt();
 		Output output = FCFS(head, requests);
 		System.out.println("The sequence of head movement using FCFS:");
+		out += "The sequence of head movement using FCFS:\n";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
-			if(i != output.sequence.size() - 1)
+			out += output.sequence.elementAt(i);
+			if(i != output.sequence.size() - 1) {
 				System.out.print(" , ");
+				out += " , ";
+			}
 		}
 		System.out.println();
+		out += "\n";
 		System.out.println("Total Head Movements using FCFS: " + output.totalHeadMovements);
-		
+		System.out.println("---------------------------------------------------------------");
+		out += "Total Head Movements using FCFS: " + output.totalHeadMovements + "\n";
+		out += "---------------------------------------------------------------\n";
 		output = SSTF(head, requests);
 		System.out.println("The sequence of head movement using SSTF:");
+		out += "The sequence of head movement using SSTF:\n";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
-			if(i != output.sequence.size() - 1)
+			out += output.sequence.elementAt(i);
+			if(i != output.sequence.size() - 1) {
 				System.out.print(" , ");
+				out += " , ";
+			}
 		}
 		System.out.println();
+		out += "\n";
 		System.out.println("Total Head Movements using SSTF: " + output.totalHeadMovements);
+		System.out.println("---------------------------------------------------------------");
+		out += "Total Head Movements using SSTF: " + output.totalHeadMovements + "\n";
+		out += "---------------------------------------------------------------\n";
 		
 		output = SCAN(head, requests);
 		System.out.println("The sequence of head movement using SCAN:");
+		out += "The sequence of head movement using SCAN:\n";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
-			if(i != output.sequence.size() - 1)
+			out += output.sequence.elementAt(i);
+			if(i != output.sequence.size() - 1) {
 				System.out.print(" , ");
+				out += " , ";
+			}
 		}
 		System.out.println();
+		out += "\n";
 		System.out.println("Total Head Movements using SCAN: " + output.totalHeadMovements);
+		out += "Total Head Movements using SCAN: " + output.totalHeadMovements + "\n";
+		System.out.println("---------------------------------------------------------------");
+		out += "---------------------------------------------------------------\n";
 		
 		output = CSCAN(head, requests);
 		System.out.println("The sequence of head movement using C-SCAN:");
+		out += "The sequence of head movement using C-SCAN:" + "\n";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
-			if(i != output.sequence.size() - 1)
+			out += output.sequence.elementAt(i) + "\n";
+			if(i != output.sequence.size() - 1) {
 				System.out.print(" , ");
+				out += " , ";
+			}
 		}
 		System.out.println();
+		out += "\n";
 		System.out.println("Total Head Movements using C-SCAN: " + output.totalHeadMovements);
+		out += "Total Head Movements using C-SCAN: " + output.totalHeadMovements + "\n";
+		System.out.println("---------------------------------------------------------------");
+		out += "---------------------------------------------------------------\n";
 		
 		output = CLOOK(head, requests);
 		System.out.println("The sequence of head movement using C-LOOK:");
+		out += "The sequence of head movement using C-LOOK:\n";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
-			if(i != output.sequence.size() - 1)
+			out += output.sequence.elementAt(i);
+			if(i != output.sequence.size() - 1) {
 				System.out.print(" , ");
+				out += " , ";
+			}
 		}
 		System.out.println();
+		out += "\n";
 		System.out.println("Total Head Movements using C-LOOK: " + output.totalHeadMovements);
+		out += "Total Head Movements using C-LOOK: " + output.totalHeadMovements + "\n";
+		System.out.println("---------------------------------------------------------------");
+		out += "---------------------------------------------------------------\n";
+		
 		
 		output = newOptimized(requests);
 		System.out.println("The sequence of head movement using the new optimized algorithm:");
+		out += "The sequence of head movement using the new optimized algorithm:\n";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
-			if(i != output.sequence.size() - 1)
+			out += output.sequence.elementAt(i);
+			if(i != output.sequence.size() - 1) {
 				System.out.print(" , ");
+				out += " , ";
+			}
 		}
 		System.out.println();
+		out += "\n";
 		System.out.println("Total Head Movements using the new optimized algorithm: " + output.totalHeadMovements);
+		out += "Total Head Movements using the new optimized algorithm: " + output.totalHeadMovements + "\n";
+		System.out.println("---------------------------------------------------------------");
+		out += "---------------------------------------------------------------\n";
 		
+		return out;
 		
 	}
 	public static Output CLOOK(int head, Vector<Integer> requests) {
@@ -130,6 +180,7 @@ public class disk_scheduling {
 		}
 		Output output = new Output(sequence);
 		System.out.println("C-SCAN head movements:" + (output.totalHeadMovements - sum * 199));
+		out += "C-SCAN head movements:" + (output.totalHeadMovements - sum * 199) + "\n";
 		return output;
 		
 	}
@@ -203,6 +254,7 @@ public class disk_scheduling {
 		}
 		Output output = new Output(seq);
 		System.out.println("SCAN head movements : " + output.totalHeadMovements);
+		out += "SCAN head movements : " + output.totalHeadMovements + "\n";
 		output = new Output(sequence);
 		return output;
 	}

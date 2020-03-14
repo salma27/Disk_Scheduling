@@ -16,6 +16,7 @@ public class GUI {
 
 	private JFrame frame;
 	private JTextField textField;
+	private JTextArea textArea;
 	public String out = "";
 
 	/**
@@ -55,25 +56,17 @@ public class GUI {
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		ArithmaticCodingGUI arithmatic = new ArithmaticCodingGUI();
+		disk_scheduling dsk = new disk_scheduling();
 		JButton compress = new JButton("compress");
 		compress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fileName = textField.getText();
-				try {
-					out = arithmatic.main("1", fileName);
-					textField_1.setText(out);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedEncodingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				out = dsk.main(fileName);
+				textArea.setText(out);
 			}
 		});
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
