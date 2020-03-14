@@ -73,16 +73,15 @@ public class disk_scheduling {
 	}
 	public static Output CSCAN(int head, Vector<Integer> requests) {
 		Vector<Integer> sequence = new Vector<Integer>();
-		Vector<Integer> seq = new Vector<Integer>();
 		Vector<Integer> tmp = new Vector<Integer>();
 		Vector<Integer> vec = new Vector<Integer>();
 		
 		int counter = 0;
 		int index = 0;
 		int min = Integer.MAX_VALUE;
+		int sum = 0;
 		
 		sequence.add(head);
-		seq.add(head);
 		while(counter != requests.size()) {
 			min = Integer.MAX_VALUE;
 			index = 0;
@@ -92,6 +91,7 @@ public class disk_scheduling {
 				if(!sequence.contains(requests.get(i))) 
 					tmp.add(requests.get(i));
 			vec = getMax(head, tmp);
+			//vec = getMin(head, tmp);
 			if(vec.size() > 0) {
 				for(int i = 0 ; i < vec.size() ; i++) {
 					if(min > Math.abs(head - vec.get(i))) {							min = Math.abs(head - vec.get(i));
@@ -100,7 +100,6 @@ public class disk_scheduling {
 				}
 				head = vec.get(index);
 				sequence.add(head);
-				seq.add(head);
 				counter++;
 			}
 			else {
@@ -108,10 +107,15 @@ public class disk_scheduling {
 					sequence.add(199);
 				sequence.add(0);
 				head = 0;
+				sum++;
+				/*if(sequence.lastElement() != 0)
+					sequence.add(0);
+				sequence.add(199);
+				head = 199;*/
 			}
 		}
-		Output output = new Output(seq);
-		output = new Output(sequence);
+		Output output = new Output(sequence);
+		System.out.println("CSCAN head movements:" + (output.totalHeadMovements - sum * 199));
 		return output;
 		
 	}
