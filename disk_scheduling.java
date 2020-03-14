@@ -50,14 +50,24 @@ public class disk_scheduling {
 		System.out.println("Total Head Movements using SCAN: " + output.totalHeadMovements);
 		
 		output = CSCAN(head, requests);
-		System.out.println("The sequence of head movement using CSCAN:");
+		System.out.println("The sequence of head movement using C-SCAN:");
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
 			if(i != output.sequence.size() - 1)
 				System.out.print(" , ");
 		}
 		System.out.println();
-		System.out.println("Total Head Movements using CSCAN: " + output.totalHeadMovements);
+		System.out.println("Total Head Movements using C-SCAN: " + output.totalHeadMovements);
+		
+		output = CLOOK(head, requests);
+		System.out.println("The sequence of head movement using C-LOOK:");
+		for(int i = 0 ; i < output.sequence.size() ; i++) {
+			System.out.print(output.sequence.elementAt(i));
+			if(i != output.sequence.size() - 1)
+				System.out.print(" , ");
+		}
+		System.out.println();
+		System.out.println("Total Head Movements using C-LOOK: " + output.totalHeadMovements);
 		
 		output = newOptimized(requests);
 		System.out.println("The sequence of head movement using the new optimized algorithm:");
@@ -70,6 +80,10 @@ public class disk_scheduling {
 		System.out.println("Total Head Movements using the new optimized algorithm: " + output.totalHeadMovements);
 		
 		
+	}
+	public static Output CLOOK(int head, Vector<Integer> requests) {
+		Output output = new Output();
+		return output;
 	}
 	public static Output CSCAN(int head, Vector<Integer> requests) {
 		Vector<Integer> sequence = new Vector<Integer>();
@@ -115,7 +129,7 @@ public class disk_scheduling {
 			}
 		}
 		Output output = new Output(sequence);
-		System.out.println("CSCAN head movements:" + (output.totalHeadMovements - sum * 199));
+		System.out.println("C-SCAN head movements:" + (output.totalHeadMovements - sum * 199));
 		return output;
 		
 	}
