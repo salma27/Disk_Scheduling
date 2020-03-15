@@ -1,7 +1,7 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
@@ -17,6 +17,7 @@ public class GUI {
 	private JTextField textField;
 	private JTextArea textArea;
 	public String out = "";
+
 	/**
 	 * Launch the application.
 	 */
@@ -47,19 +48,24 @@ public class GUI {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 844, 530);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JLabel lblFileName = new JLabel("File Name: ");
-		
+
 		textField = new JTextField();
 		textField.setColumns(10);
-		
+
 		JButton btnInput = new JButton("Input");
-		
+
 		textArea = new JTextArea("");
 		btnInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fileName = textField.getText();
-				out = disk_scheduling.main(fileName);
+				try {
+					out = disk_scheduling.main(fileName);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				textArea.setText(out);
 			}
 

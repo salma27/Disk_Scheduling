@@ -1,25 +1,36 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.Vector;
 
 public class disk_scheduling {
 	public static String out = "";
-	public static String main(String fileName) {
-		Scanner sc = new Scanner(System.in);
+
+	public static String main(String fileName) throws IOException {
+		File file=new File(fileName);   
+		FileInputStream fis=new FileInputStream(file);
 		
-		System.out.println("Please enter the number of requests: ");
-		int num = sc.nextInt();
+		//Scanner sc = new Scanner(System.in);
+		//System.out.println("Please enter the number of requests: ");
+		//int num = sc.nextInt();
+		int num = fis.read();
+		
 		System.out.println("Please enter your I/O Requests : ");
 		int req = 0;
 		Vector<Integer> requests = new Vector<Integer>();
 		for(int i = 0 ; i < num ; i++) {
-			sc.reset();
-			req = sc.nextInt();
+			//sc.reset();
+			//req = sc.nextInt();
+			req = fis.read();
 			requests.add(req);
 		}
 		System.out.println("Please Enter the Initial head start cylinder: ");
-		sc.reset();
-		int head = sc.nextInt();
+		//sc.reset();
+		//int head = sc.nextInt();
+		int head = fis.read();
 		Output output = FCFS(head, requests);
 		System.out.println("The sequence of head movement using FCFS:");
 		out += "The sequence of head movement using FCFS: ";
@@ -128,7 +139,7 @@ public class disk_scheduling {
 		out += "Total Head Movements using the new optimized algorithm: " + output.totalHeadMovements + "\n";
 		System.out.println("---------------------------------------------------------------");
 		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
-		sc.close();
+		//sc.close();
 		return out;
 		
 	}
