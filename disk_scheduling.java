@@ -9,28 +9,26 @@ import java.util.Vector;
 public class disk_scheduling {
 	public static String out = "";
 
-	public static String main(String fileName) throws IOException {
-		File file=new File(fileName);   
-		FileInputStream fis=new FileInputStream(file);
+	public static String main( String fileName) throws IOException {
+		//File file=new File(fileName);   
+		//FileInputStream fis=new FileInputStream(file);
 		
-		//Scanner sc = new Scanner(System.in);
+		final Scanner sc = new Scanner(new File( fileName ));
 		//System.out.println("Please enter the number of requests: ");
-		//int num = sc.nextInt();
-		int num = fis.read();
+		int num = sc.nextInt();
+		
 		
 		System.out.println("Please enter your I/O Requests : ");
 		int req = 0;
-		Vector<Integer> requests = new Vector<Integer>();
+		final Vector<Integer> requests = new Vector<Integer>();
 		for(int i = 0 ; i < num ; i++) {
 			//sc.reset();
-			//req = sc.nextInt();
-			req = fis.read();
+			req = sc.nextInt();
 			requests.add(req);
 		}
 		System.out.println("Please Enter the Initial head start cylinder: ");
 		//sc.reset();
-		//int head = sc.nextInt();
-		int head = fis.read();
+		int head = sc.nextInt();
 		Output output = FCFS(head, requests);
 		System.out.println("The sequence of head movement using FCFS:");
 		out += "The sequence of head movement using FCFS: ";
@@ -143,85 +141,88 @@ public class disk_scheduling {
 		return out;
 		
 	}
-	public static Output CLOOK(int head, Vector<Integer> requests) {
-		Output output = new Output();
+
+	public static Output CLOOK(final int head, final Vector<Integer> requests) {
+		final Output output = new Output();
 		return output;
 	}
-	public static Output CSCAN(int head, Vector<Integer> requests) {
-		Vector<Integer> sequence = new Vector<Integer>();
-		Vector<Integer> tmp = new Vector<Integer>();
+
+	public static Output CSCAN(int head, final Vector<Integer> requests) {
+		final Vector<Integer> sequence = new Vector<Integer>();
+		final Vector<Integer> tmp = new Vector<Integer>();
 		Vector<Integer> vec = new Vector<Integer>();
-		
+
 		int counter = 0;
 		int index = 0;
 		int min = Integer.MAX_VALUE;
 		int sum = 0;
-		
+
 		sequence.add(head);
-		while(counter != requests.size()) {
+		while (counter != requests.size()) {
 			min = Integer.MAX_VALUE;
 			index = 0;
 			vec.clear();
 			tmp.clear();
-			for(int i = 0 ; i < requests.size(); i++) 
-				if(!sequence.contains(requests.get(i))) 
+			for (int i = 0; i < requests.size(); i++)
+				if (!sequence.contains(requests.get(i)))
 					tmp.add(requests.get(i));
 			vec = getMax(head, tmp);
-			//vec = getMin(head, tmp);
-			if(vec.size() > 0) {
-				for(int i = 0 ; i < vec.size() ; i++) {
-					if(min > Math.abs(head - vec.get(i))) {							min = Math.abs(head - vec.get(i));
+			// vec = getMin(head, tmp);
+			if (vec.size() > 0) {
+				for (int i = 0; i < vec.size(); i++) {
+					if (min > Math.abs(head - vec.get(i))) {
+						min = Math.abs(head - vec.get(i));
 						index = i;
 					}
 				}
 				head = vec.get(index);
 				sequence.add(head);
 				counter++;
-			}
-			else {
-				if(sequence.lastElement() != 199)	
+			} else {
+				if (sequence.lastElement() != 199)
 					sequence.add(199);
 				sequence.add(0);
 				head = 0;
 				sum++;
-				/*if(sequence.lastElement() != 0)
-					sequence.add(0);
-				sequence.add(199);
-				head = 199;*/
+				/*
+				 * if(sequence.lastElement() != 0) sequence.add(0); sequence.add(199); head =
+				 * 199;
+				 */
 			}
 		}
-		Output output = new Output(sequence);
+		final Output output = new Output(sequence);
 		System.out.println("C-SCAN head movements:" + (output.totalHeadMovements - sum * 199));
 		out += "C-SCAN head movements:" + (output.totalHeadMovements - sum * 199) + "\n";
 		return output;
-		
+
 	}
-	public static Output SCAN(int head, Vector<Integer> requests) {
-		Vector<Integer> sequence = new Vector<Integer>();
-		Vector<Integer> seq = new Vector<Integer>();
-		Vector<Integer> tmp = new Vector<Integer>();
+
+	public static Output SCAN(int head, final Vector<Integer> requests) {
+		final Vector<Integer> sequence = new Vector<Integer>();
+		final Vector<Integer> seq = new Vector<Integer>();
+		final Vector<Integer> tmp = new Vector<Integer>();
 		Vector<Integer> vec = new Vector<Integer>();
-		
+
 		int counter = 0;
 		boolean down = true;
 		int index = 0;
 		int min = Integer.MAX_VALUE;
-		
+
 		sequence.add(head);
 		seq.add(head);
-		while(counter != requests.size()) {
+		while (counter != requests.size()) {
 			min = Integer.MAX_VALUE;
 			index = 0;
 			vec.clear();
 			tmp.clear();
-			for(int i = 0 ; i < requests.size(); i++) 
-				if(!sequence.contains(requests.get(i))) 
+			for (int i = 0; i < requests.size(); i++)
+				if (!sequence.contains(requests.get(i)))
 					tmp.add(requests.get(i));
-			if(down) {
+			if (down) {
 				vec = getMin(head, tmp);
-				if(vec.size() > 0) {
-					for(int i = 0 ; i < vec.size() ; i++) {
-						if(min > Math.abs(head - vec.get(i))) {
+				if (vec.size() > 0) {
+					for (int i = 0; i < vec.size(); i++) {
+						if (min > Math.abs(head - vec.get(i))) {
 							min = Math.abs(head - vec.get(i));
 							index = i;
 						}
@@ -230,21 +231,19 @@ public class disk_scheduling {
 					sequence.add(head);
 					seq.add(head);
 					counter++;
-				}
-				else {
+				} else {
 					down = false;
-					if(!down && counter != requests.size()) {
-						if(sequence.lastElement() != 0)
+					if (!down && counter != requests.size()) {
+						if (sequence.lastElement() != 0)
 							sequence.add(0);
 						head = 0;
 					}
 				}
-			}
-			else {
+			} else {
 				vec = getMax(head, tmp);
-				if(vec.size() > 0) {
-					for(int i = 0 ; i < vec.size() ; i++) {
-						if(min > Math.abs(head - vec.get(i))) {
+				if (vec.size() > 0) {
+					for (int i = 0; i < vec.size(); i++) {
+						if (min > Math.abs(head - vec.get(i))) {
 							min = Math.abs(head - vec.get(i));
 							index = i;
 						}
@@ -253,11 +252,10 @@ public class disk_scheduling {
 					sequence.add(head);
 					seq.add(head);
 					counter++;
-				}
-				else {
+				} else {
 					down = true;
-					if(down && counter != requests.size()) {
-						if(sequence.lastElement() != 199)
+					if (down && counter != requests.size()) {
+						if (sequence.lastElement() != 199)
 							sequence.add(199);
 						head = 199;
 					}
@@ -270,77 +268,84 @@ public class disk_scheduling {
 		output = new Output(sequence);
 		return output;
 	}
-	public static Vector<Integer> getMin(int head, Vector<Integer> requests){
-		Vector<Integer> tmp = new Vector<Integer>();
-		for(int i = 0 ; i < requests.size() ; i++)
-			if(requests.get(i) < head)
+
+	public static Vector<Integer> getMin(final int head, final Vector<Integer> requests) {
+		final Vector<Integer> tmp = new Vector<Integer>();
+		for (int i = 0; i < requests.size(); i++)
+			if (requests.get(i) < head)
 				tmp.add(requests.get(i));
 		return tmp;
 	}
-	public static Vector<Integer> getMax(int head, Vector<Integer> requests){
-		Vector<Integer> tmp = new Vector<Integer>();
-		for(int i = 0 ; i < requests.size() ; i++)
-			if(requests.get(i) > head)
+
+	public static Vector<Integer> getMax(final int head, final Vector<Integer> requests) {
+		final Vector<Integer> tmp = new Vector<Integer>();
+		for (int i = 0; i < requests.size(); i++)
+			if (requests.get(i) > head)
 				tmp.add(requests.get(i));
 		return tmp;
 	}
-	public static Output newOptimized(Vector<Integer> requests) {
-		Vector<Integer> tmp = new Vector<Integer>();
+
+	public static Output newOptimized(final Vector<Integer> requests) {
+		final Vector<Integer> tmp = new Vector<Integer>();
 		tmp.add(0);
-		for(int i = 0 ; i < requests.size() ; i++)
+		for (int i = 0; i < requests.size(); i++)
 			tmp.add(requests.get(i));
 		Collections.sort(tmp);
-		Output output = new Output(tmp);
+		final Output output = new Output(tmp);
 		return output;
 	}
-	public static Output SSTF(int head, Vector<Integer> requests) {
-		Vector<Integer> tmp = new Vector<Integer>();
-		for(int i = 0 ; i < requests.size() ; i++)
+
+	public static Output SSTF(int head, final Vector<Integer> requests) {
+		final Vector<Integer> tmp = new Vector<Integer>();
+		for (int i = 0; i < requests.size(); i++)
 			tmp.add(requests.elementAt(i));
-		Vector<Integer> sequence = new Vector<Integer>();
+		final Vector<Integer> sequence = new Vector<Integer>();
 		sequence.add(head);
 		int min = Integer.MAX_VALUE;
 		int index = 0;
-		while(sequence.size() - 1 !=  requests.size()) {
+		while (sequence.size() - 1 != requests.size()) {
 			index = 0;
 			min = Integer.MAX_VALUE;
-			for(int i = 0 ; i < tmp.size() ; i++) {
-				if(min > Math.abs(head - tmp.get(i))) {
+			for (int i = 0; i < tmp.size(); i++) {
+				if (min > Math.abs(head - tmp.get(i))) {
 					min = Math.abs(head - tmp.get(i));
 					index = i;
 				}
 			}
-			
+
 			head = tmp.get(index);
 			sequence.add(head);
 			tmp.clear();
-			for(int i = 0 ; i < requests.size() ; i++)
-				if(!sequence.contains(requests.get(i)))
+			for (int i = 0; i < requests.size(); i++)
+				if (!sequence.contains(requests.get(i)))
 					tmp.add(requests.get(i));
-				
-			
+
 		}
-		Output output = new Output(sequence);
+		final Output output = new Output(sequence);
 		return output;
 	}
-	public static Output FCFS(int head, Vector<Integer> requests) {
-		Vector<Integer> sequence = new Vector<Integer>();
+
+	public static Output FCFS(final int head, final Vector<Integer> requests) {
+		final Vector<Integer> sequence = new Vector<Integer>();
 		sequence.add(head);
-		for(int i = 0 ; i < requests.size() ; i++) {
+		for (int i = 0; i < requests.size(); i++) {
 			sequence.add(requests.elementAt(i));
 		}
-		Output output = new Output(sequence);
+		final Output output = new Output(sequence);
 		return output;
 	}
 }
-class Output{
+
+class Output {
 	Vector<Integer> sequence;
 	int totalHeadMovements;
-	Output(){
+
+	Output() {
 		sequence = new Vector<Integer>();
 		totalHeadMovements = 0;
 	}
-	Output(Vector<Integer> sequence){
+
+	Output(final Vector<Integer> sequence) {
 		this.sequence = sequence;
 		totalHeadMovements = 0;
 		for(int i = 0 ; i < sequence.size() - 1 ; i++) {
