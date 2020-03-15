@@ -102,7 +102,7 @@ public class disk_scheduling {
 		System.out.println("---------------------------------------------------------------");
 		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
 		
-		output = CLOOK(head, requests);
+		/*output = CLOOK(head, requests);
 		System.out.println("The sequence of head movement using C-LOOK:");
 		out += "The sequence of head movement using C-LOOK: ";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
@@ -119,7 +119,7 @@ public class disk_scheduling {
 		out += "Total Head Movements using C-LOOK: " + output.totalHeadMovements + "\n";
 		System.out.println("---------------------------------------------------------------");
 		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
-		
+		*/
 		
 		output = newOptimized(requests);
 		System.out.println("The sequence of head movement using the new optimized algorithm:");
@@ -143,11 +143,11 @@ public class disk_scheduling {
 		
 	}
 
-	public static Output CLOOK(final int head, final Vector<Integer> requests) {
+	/*public static Output CLOOK(final int head, final Vector<Integer> requests) {
 		final Output output = new Output();
 		return output;
 	}
-
+*/
 	public static Output CSCAN(int head, final Vector<Integer> requests) {
 		final Vector<Integer> sequence = new Vector<Integer>();
 		final Vector<Integer> tmp = new Vector<Integer>();
