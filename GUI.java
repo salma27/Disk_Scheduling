@@ -18,7 +18,6 @@ public class GUI {
 	private JTextField textField;
 	private JTextArea textArea;
 	public String out = "";
-
 	/**
 	 * Launch the application.
 	 */
@@ -47,54 +46,54 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setEnabled(false);
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 844, 517);
+		frame.setBounds(100, 100, 844, 530);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("File Name :");
+		JLabel lblFileName = new JLabel("File Name: ");
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		disk_scheduling dsk = new disk_scheduling();
-		JButton compress = new JButton("compress");
-		compress.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String fileName = textField.getText();
-				out = dsk.main(fileName);
-				textArea.setText(out);
-			}
-		});
+		
+		JButton btnInput = new JButton("Input");
 		
 		textArea = new JTextArea();
+		btnInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fileName = textField.getText();
+				out = disk_scheduling.main(fileName);
+				textArea.setText(out);
+			}
+
+			
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(91)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-							.addGap(58)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 351, GroupLayout.PREFERRED_SIZE)
-							.addGap(68)
-							.addComponent(compress))
+							.addGap(48)
+							.addComponent(lblFileName, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+							.addGap(29)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 399, GroupLayout.PREFERRED_SIZE)
+							.addGap(65)
+							.addComponent(btnInput, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(47)
-							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 741, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(52, Short.MAX_VALUE))
+							.addGap(40)
+							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 747, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(43, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(45)
+					.addGap(32)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
+						.addComponent(lblFileName)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(compress))
-					.addGap(34)
-					.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 342, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(46, Short.MAX_VALUE))
+						.addComponent(btnInput))
+					.addGap(43)
+					.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 352, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(43, Short.MAX_VALUE))
 		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
