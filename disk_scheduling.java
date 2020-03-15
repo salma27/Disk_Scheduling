@@ -22,7 +22,7 @@ public class disk_scheduling {
 		int head = sc.nextInt();
 		Output output = FCFS(head, requests);
 		System.out.println("The sequence of head movement using FCFS:");
-		out += "The sequence of head movement using FCFS:\n";
+		out += "The sequence of head movement using FCFS: ";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
 			out += output.sequence.elementAt(i);
@@ -39,7 +39,7 @@ public class disk_scheduling {
 		out += "---------------------------------------------------------------\n";
 		output = SSTF(head, requests);
 		System.out.println("The sequence of head movement using SSTF:");
-		out += "The sequence of head movement using SSTF:\n";
+		out += "The sequence of head movement using SSTF: ";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
 			out += output.sequence.elementAt(i);
@@ -57,7 +57,7 @@ public class disk_scheduling {
 		
 		output = SCAN(head, requests);
 		System.out.println("The sequence of head movement using SCAN:");
-		out += "The sequence of head movement using SCAN:\n";
+		out += "The sequence of head movement using SCAN: ";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
 			out += output.sequence.elementAt(i);
@@ -75,7 +75,7 @@ public class disk_scheduling {
 		
 		output = CSCAN(head, requests);
 		System.out.println("The sequence of head movement using C-SCAN:");
-		out += "The sequence of head movement using C-SCAN:" + "\n";
+		out += "The sequence of head movement using C-SCAN: ";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
 			out += output.sequence.elementAt(i) + "\n";
@@ -93,7 +93,7 @@ public class disk_scheduling {
 		
 		output = CLOOK(head, requests);
 		System.out.println("The sequence of head movement using C-LOOK:");
-		out += "The sequence of head movement using C-LOOK:\n";
+		out += "The sequence of head movement using C-LOOK: ";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
 			out += output.sequence.elementAt(i);
@@ -112,7 +112,7 @@ public class disk_scheduling {
 		
 		output = newOptimized(requests);
 		System.out.println("The sequence of head movement using the new optimized algorithm:");
-		out += "The sequence of head movement using the new optimized algorithm:\n";
+		out += "The sequence of head movement using the new optimized algorithm: ";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
 			out += output.sequence.elementAt(i);

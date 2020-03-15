@@ -56,11 +56,13 @@ public class GUI {
 		
 		JButton btnInput = new JButton("Input");
 		
-		textArea = new JTextArea();
+		textArea = new JTextArea("");
 		btnInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fileName = textField.getText();
+				System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 				out = disk_scheduling.main(fileName);
+System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkk");
 				textArea.setText(out);
 			}
 
