@@ -1,5 +1,4 @@
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -7,6 +6,7 @@ public class disk_scheduling {
 	public static String out = "";
 	public static String main(String fileName) {
 		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("Please enter the number of requests: ");
 		int num = sc.nextInt();
 		System.out.println("Please enter your I/O Requests : ");
@@ -128,7 +128,7 @@ public class disk_scheduling {
 		out += "Total Head Movements using the new optimized algorithm: " + output.totalHeadMovements + "\n";
 		System.out.println("---------------------------------------------------------------");
 		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
-		
+		sc.close();
 		return out;
 		
 	}
@@ -336,4 +336,5 @@ class Output{
 			totalHeadMovements += Math.abs(sequence.elementAt(i) - sequence.elementAt(i + 1));
 		}
 	}
+	
 }
