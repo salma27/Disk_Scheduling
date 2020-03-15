@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.Vector;
-
+//C:\\Users\\lenovo\\Desktop\\a.txt
 public class disk_scheduling {
 	public static String out = "";
 
