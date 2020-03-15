@@ -60,9 +60,7 @@ public class GUI {
 		btnInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fileName = textField.getText();
-				System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 				out = disk_scheduling.main(fileName);
-System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkk");
 				textArea.setText(out);
 			}
 

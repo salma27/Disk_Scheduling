@@ -36,7 +36,8 @@ public class disk_scheduling {
 		System.out.println("Total Head Movements using FCFS: " + output.totalHeadMovements);
 		System.out.println("---------------------------------------------------------------");
 		out += "Total Head Movements using FCFS: " + output.totalHeadMovements + "\n";
-		out += "---------------------------------------------------------------\n";
+		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+		
 		output = SSTF(head, requests);
 		System.out.println("The sequence of head movement using SSTF:");
 		out += "The sequence of head movement using SSTF: ";
@@ -53,7 +54,7 @@ public class disk_scheduling {
 		System.out.println("Total Head Movements using SSTF: " + output.totalHeadMovements);
 		System.out.println("---------------------------------------------------------------");
 		out += "Total Head Movements using SSTF: " + output.totalHeadMovements + "\n";
-		out += "---------------------------------------------------------------\n";
+		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
 		
 		output = SCAN(head, requests);
 		System.out.println("The sequence of head movement using SCAN:");
@@ -71,14 +72,14 @@ public class disk_scheduling {
 		System.out.println("Total Head Movements using SCAN: " + output.totalHeadMovements);
 		out += "Total Head Movements using SCAN: " + output.totalHeadMovements + "\n";
 		System.out.println("---------------------------------------------------------------");
-		out += "---------------------------------------------------------------\n";
+		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
 		
 		output = CSCAN(head, requests);
 		System.out.println("The sequence of head movement using C-SCAN:");
 		out += "The sequence of head movement using C-SCAN: ";
 		for(int i = 0 ; i < output.sequence.size() ; i++) {
 			System.out.print(output.sequence.elementAt(i));
-			out += output.sequence.elementAt(i) + "\n";
+			out += output.sequence.elementAt(i);
 			if(i != output.sequence.size() - 1) {
 				System.out.print(" , ");
 				out += " , ";
@@ -89,7 +90,7 @@ public class disk_scheduling {
 		System.out.println("Total Head Movements using C-SCAN: " + output.totalHeadMovements);
 		out += "Total Head Movements using C-SCAN: " + output.totalHeadMovements + "\n";
 		System.out.println("---------------------------------------------------------------");
-		out += "---------------------------------------------------------------\n";
+		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
 		
 		output = CLOOK(head, requests);
 		System.out.println("The sequence of head movement using C-LOOK:");
@@ -107,7 +108,7 @@ public class disk_scheduling {
 		System.out.println("Total Head Movements using C-LOOK: " + output.totalHeadMovements);
 		out += "Total Head Movements using C-LOOK: " + output.totalHeadMovements + "\n";
 		System.out.println("---------------------------------------------------------------");
-		out += "---------------------------------------------------------------\n";
+		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
 		
 		
 		output = newOptimized(requests);
@@ -126,7 +127,7 @@ public class disk_scheduling {
 		System.out.println("Total Head Movements using the new optimized algorithm: " + output.totalHeadMovements);
 		out += "Total Head Movements using the new optimized algorithm: " + output.totalHeadMovements + "\n";
 		System.out.println("---------------------------------------------------------------");
-		out += "---------------------------------------------------------------\n";
+		out += "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
 		
 		return out;
 		
